@@ -17,21 +17,61 @@ Instruções:
 # Função para calcular a média
 def calcular_media(lista):
     # TODO: implementar a soma dos elementos e dividir pelo tamanho da lista
-    pass
+    if not lista:
+        return 0
+    return sum(lista) / len(lista)
 
 
 # Função para calcular a mediana
 def calcular_mediana(lista):
     # TODO: ordenar a lista e encontrar o elemento do meio
     # 💡 Dica: se o tamanho for par, tire a média dos dois elementos centrais
-    pass
+    # 1. Ordenar a lista
+    lista_ordenada = sorted(lista)
+    n = len(lista_ordenada)
+    
+    # 2. Verificar se o número de elementos é ímpar ou par
+    if n % 2 == 1:
+        # Se ímpar, a mediana é o elemento do meio
+        indice_meio = n // 2
+        mediana = lista_ordenada[indice_meio]
+    else:
+        # Se par, a mediana é a média dos dois elementos do meio
+        indice1 = n // 2 - 1
+        indice2 = n // 2
+        mediana = (lista_ordenada[indice1] + lista_ordenada[indice2]) / 2
+        
+    return mediana
 
 
 # Função para calcular a moda
 def calcular_moda(lista):
     # TODO: encontrar o valor que mais aparece
     # 💡 Dica: use um dicionário para contar as ocorrências
-    pass
+    if not lista:
+        return "A lista de dados está vazia."
+
+    # Usar um dicionário para armazenar a contagem de frequência de cada elemento
+    contagem_frequencia = {}
+    for elemento in lista:
+        if elemento in contagem_frequencia:
+            contagem_frequencia[elemento] += 1
+        else:
+            contagem_frequencia[elemento] = 1
+
+    # Encontrar a frequência máxima
+    frequencia_maxima = 0
+    for elemento in contagem_frequencia:
+        if contagem_frequencia[elemento] > frequencia_maxima:
+            frequencia_maxima = contagem_frequencia[elemento]
+            
+    # Encontrar todos os elementos que têm a frequência máxima (caso bimodal/multimodal)
+    modas = []
+    for elemento in contagem_frequencia:
+        if contagem_frequencia[elemento] == frequencia_maxima:
+            modas.append(elemento)
+            
+    return modas
 
 
 def main():
